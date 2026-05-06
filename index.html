@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trixie Leigh’s 18th Birthday Portal</title>
+  <style>
+:root{
+      /* More pinkish/light cozy palette */
+      --bg1:#ffe3f2;
+      --bg2:#fff0fb;
+      --card:#ffffffcc;
+      --text:#3b2333;
+      --muted:#7a4f6c;
+      --pink:#ff4fa0;
+      --lav:#d7b3ff;
+      --mint:#7beadf;
+      --border:rgba(255, 79, 160, .20);
+      --shadow:0 18px 50px rgba(255, 79, 160, .14);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(900px 500px at 10% 10%, var(--bg2), transparent 55%),
+                  radial-gradient(900px 520px at 90% 15%, var(--bg1), transparent 55%),
+                  linear-gradient(180deg, #ffffff 0%, #fbfbff 45%, #fff8fd 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* Soft floated hearts */
+    .floating-hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+
+    .floating-hearts .heart{
+      position:absolute;
+      color: rgba(255, 79, 160, .35);
+      filter: blur(.0px);
+      font-size: 18px;
+      opacity: .9;
+      user-select:none;
+      animation: floatHeart linear infinite;
+      will-change: transform;
+    }
+
+    @keyframes floatHeart{
+      0%{ transform: translateY(120px) translateX(0) rotate(0deg); }
+      100%{ transform: translateY(-140px) translateX(40px) rotate(18deg); }
+    }
+
+    .wrap{ position:relative; z-index:1; }
+
+    .wrap{
+      width:min(980px, 100%);
+      margin:0 auto;
+      padding:28px 16px 60px;
+    }
+
+    .hero{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      margin:10px 0 22px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: clamp(22px, 3.3vw, 34px);
+      letter-spacing:.2px;
+    }
+
+    .brand .sub{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+      margin-top:-2px;
+    }
+
+    .badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(255,111,177,.15), rgba(180,155,255,.15));
+      border:1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(90,60,120,.08);
+      font-weight:700;
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+    }
+
+    @media (min-width: 860px){
+      .grid{grid-template-columns: 1fr 1fr;}
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card .hd{
+      padding:16px 18px 8px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .card .hd h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+
+    .card .bd{
+      padding:10px 18px 18px;
+    }
+
+    .message{
+      font-size:15px;
+      line-height:1.7;
+      margin:0;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .pill{
+      padding:10px 12px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,111,177,.12), rgba(180,155,255,.08));
+      border:1px solid rgba(122,88,140,.18);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+
+    /* Portal */
+    .portal{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      align-items:stretch;
+      margin-top:8px;
+    }
+
+    @media (min-width: 860px){
+      .portal{grid-template-columns: 1.2fr .8fr;}
+    }
+
+    .lock{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:190px;
+      background: linear-gradient(135deg, rgba(255,111,177,.12), rgba(180,155,255,.12));
+      position:relative;
+    }
+
+    .lock::before{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,111,177,.20), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(180,155,255,.22), transparent 42%),
+        radial-gradient(circle at 55% 85%, rgba(101,230,214,.18), transparent 42%);
+      filter: blur(2px);
+      pointer-events:none;
+    }
+
+    .lock .lock-inner{
+      position:relative;
+      text-align:center;
+      padding:18px;
+    }
+
+    .lock .big{
+      font-size:46px;
+      line-height:1;
+      margin-bottom:10px;
+    }
+
+    .lock .hint{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+      margin:0;
+    }
+
+    .form{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    label{
+      font-weight:700;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    input[type="password"]{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(122,88,140,.22);
+      background: rgba(255,255,255,.75);
+      outline:none;
+      font-size:15px;
+    }
+
+    button{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:900;
+      letter-spacing:.2px;
+      color:white;
+      background: linear-gradient(90deg, var(--pink), var(--lav));
+      box-shadow: 0 14px 28px rgba(255,111,177,.18);
+      transition: transform .08s ease;
+    }
+
+    button:active{transform: translateY(1px)}
+
+    .ghost{
+      background: rgba(255,255,255,.6);
+      border:1px solid rgba(122,88,140,.20);
+      color:var(--muted);
+      font-weight:850;
+      box-shadow:none;
+    }
+
+    .status{
+      min-height:22px;
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    /* Conversations */
+    .shot-list{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    @media (min-width: 860px){
+      .shot-list{grid-template-columns:1fr 1fr;}
+    }
+
+    .shot{
+      border-radius:18px;
+      border:1px dashed rgba(122,88,140,.30);
+      background: rgba(255,255,255,.6);
+      overflow:hidden;
+      position:relative;
+      min-height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+      text-align:center;
+      color:var(--muted);
+      font-weight:750;
+    }
+
+    .shot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+    }
+
+    @media (min-width: 620px){
+      .gallery{grid-template-columns: repeat(4, 1fr)}
+    }
+
+    .thumb{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(122,88,140,.16);
+      background: rgba(255,255,255,.6);
+      min-height:92px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .thumb span{color:var(--muted); font-weight:800; font-size:12px; padding:8px}
+
+    /* Songs */
+    .song-controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    .song-controls input[type="search"]{
+      flex: 1 1 220px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(122,88,140,.22);
+      background: rgba(255,255,255,.75);
+      outline:none;
+      font-size:15px;
+    }
+
+    .song-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .song{
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(122,88,140,.16);
+      background: rgba(255,255,255,.6);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .song .meta{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+
+    .song .title{
+      font-weight:950;
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .song .artist{
+      color:var(--muted);
+      font-weight:750;
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .audio-wrap{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    audio{
+      width: 260px;
+      max-width: 42vw;
+    }
+
+    @media (max-width: 420px){
+      audio{width: 170px; max-width: 58vw}
+    }
+
+    footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      font-weight:700;
+    }
+
+    /* Reveal */
+    [hidden]{display:none !important}
+
+    /* Fun hearts */
+    .hearts{
+      display:flex;
+      gap:8px;
+      font-size:18px;
+      margin-top:10px;
+      justify-content:center;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts" aria-hidden="true" id="floatingHearts"></div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="brand">
+        <h1>Happy 18th Birthday, <span style="color:var(--pink)">Trixie Leigh</span> ✨</h1>
+        <div class="sub">A light-colored little portal made just for you — tap in with the secret code.</div>
+      </div>
+      <div class="badge">Love • Light • 18</div>
+    </div>
+
+    <!-- PORTAL (locked by default) -->
+    <section id="portal" class="portal">
+      <div class="card">
+        <div class="lock">
+          <div class="lock-inner">
+            <div class="big">🔐</div>
+            <p class="hint">Enter the secret code to open your birthday gift.</p>
+            <div class="hearts" aria-hidden="true">💗💗💗</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="form">
+          <div>
+            <label for="code">Secret code</label>
+            <div style="height:8px"></div>
+            <input id="code" type="password" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter code" />
+          </div>
+
+          <div class="row">
+            <button id="unlockBtn" type="button">Unlock ✨</button>
+            <button id="clearBtn" type="button" class="ghost">Clear</button>
+          </div>
+
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+
+          <div style="color:var(--muted); font-size:12px; font-weight:750; line-height:1.6">
+            Tip: this page works best with images/audio you add into the <b>public</b> folder (placeholders included below).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT (hidden until unlocked) -->
+    <section id="content" hidden>
+      <div class="grid">
+        <!-- Gift message -->
+        <article class="card">
+          <div class="hd">
+            <h2>💌 My Gift Message</h2>
+            <div class="pill" style="margin-left:auto; white-space:nowrap">For your 18th</div>
+          </div>
+          <div class="bd">
+            <p class="message">
+              My dearest <b>Trixie Leigh</b>,
+              <br/><br/>
+              Happy 18th Birthday! I hope today feels soft, bright, and full of the kind of love you deserve.
+              You make my days lighter just by existing — thank you for the sweetness, the laughs, and the way you make everything feel like home.
+              <br/><br/>
+              I’m so proud of you. Keep shining, keep blooming, and keep letting your light touch the world.
+              <br/><br/>
+              <b>Always yours,</b> me 💕
+            </p>
+            <div class="pill-row">
+              <div class="pill">Light colors only • because you’re magic</div>
+              <div class="pill">No rush • just you and your gift</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Conversations -->
+        <article class="card">
+          <div class="hd">
+            <h2>📱 Our Sweet Conversations</h2>
+            <div class="pill" style="margin-left:auto; white-space:nowrap">Screenshot memories</div>
+          </div>
+          <div class="bd">
+            <div class="shot-list">
+              <div class="shot">
+                <!-- Replace with your screenshot -->
+                <img src="public/convo1.jpg" alt="Conversation screenshot 1" onerror="this.parentElement.innerHTML='<span>Upload convo1.jpg</span>';" />
+              </div>
+              <div class="shot">
+                <img src="public/convo2.jpg" alt="Conversation screenshot 2" onerror="this.parentElement.innerHTML='<span>Upload convo2.jpg</span>';" />
+              </div>
+              <div class="shot">
+                <img src="public/convo3.jpg" alt="Conversation screenshot 3" onerror="this.parentElement.innerHTML='<span>Upload convo3.jpg</span>';" />
+              </div>
+              <div class="shot">
+                <img src="public/convo4.jpg" alt="Conversation screenshot 4" onerror="this.parentElement.innerHTML='<span>Upload convo4.jpg</span>';" />
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid">
+        <!-- Gallery -->
+        <article class="card">
+          <div class="hd">
+            <h2>🌸 Our Sweet Gallery</h2>
+            <div class="pill" style="margin-left:auto; white-space:nowrap">Little moments</div>
+          </div>
+          <div class="bd">
+            <div class="gallery">
+              <div class="thumb">
+                <img src="public/gallery1.jpg" alt="Gallery photo 1" onerror="this.parentElement.innerHTML='<span>Upload gallery1.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery2.jpg" alt="Gallery photo 2" onerror="this.parentElement.innerHTML='<span>Upload gallery2.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery3.jpg" alt="Gallery photo 3" onerror="this.parentElement.innerHTML='<span>Upload gallery3.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery4.jpg" alt="Gallery photo 4" onerror="this.parentElement.innerHTML='<span>Upload gallery4.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery5.jpg" alt="Gallery photo 5" onerror="this.parentElement.innerHTML='<span>Upload gallery5.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery6.jpg" alt="Gallery photo 6" onerror="this.parentElement.innerHTML='<span>Upload gallery6.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery7.jpg" alt="Gallery photo 7" onerror="this.parentElement.innerHTML='<span>Upload gallery7.jpg</span>';" />
+              </div>
+              <div class="thumb">
+                <img src="public/gallery8.jpg" alt="Gallery photo 8" onerror="this.parentElement.innerHTML='<span>Upload gallery8.jpg</span>';" />
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Songs -->
+        <article class="card">
+          <div class="hd">
+            <h2>🎧 Our Favorite Songs</h2>
+            <div class="pill" style="margin-left:auto; white-space:nowrap">Remind me of you</div>
+          </div>
+          <div class="bd">
+            <div class="song-controls">
+              <input id="songSearch" type="search" placeholder="Search a song..." />
+              <button id="resetSongs" type="button" class="ghost">Reset</button>
+            </div>
+
+            <div id="songList" class="song-list"></div>
+
+            <div style="margin-top:10px; color:var(--muted); font-size:12px; font-weight:750; line-height:1.6">
+              Add your song files in <b>public/</b> as: song1.mp3, song2.mp3, …
+              (You can also edit the song titles/artist in the code.)
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <footer>
+        Made with light colors & lots of love for Trixie Leigh 💗
+      </footer>
+
+      <div style="display:flex; justify-content:center; margin-top:12px">
+        <button id="lockBtn" type="button" class="ghost">Lock again</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const SECRET_CODE = "2730";
+
+    const portal = document.getElementById('portal');
+    const content = document.getElementById('content');
+    const codeInput = document.getElementById('code');
+    const statusEl = document.getElementById('status');
+
+    const unlockBtn = document.getElementById('unlockBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const lockBtn = document.getElementById('lockBtn');
+
+    function showUnlocked(){
+      portal.hidden = true;
+      content.hidden = false;
+      statusEl.textContent = "Unlocked! Welcome, Trixie 💕";
+    }
+
+    function showLocked(){
+      portal.hidden = false;
+      content.hidden = true;
+      statusEl.textContent = "";
+      codeInput.value = "";
+      codeInput.focus();
+    }
+
+    function tryUnlock(){
+      const entered = (codeInput.value || '').trim();
+      if(entered === SECRET_CODE){
+        localStorage.setItem('trixieGiftUnlocked', '1');
+        showUnlocked();
+      } else {
+        statusEl.textContent = "Wrong code. Try again ✨";
+      }
+    }
+
+    unlockBtn.addEventListener('click', tryUnlock);
+    codeInput.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter') tryUnlock();
+    });
+    clearBtn.addEventListener('click', ()=>{
+      codeInput.value = "";
+      statusEl.textContent = "";
+      codeInput.focus();
+    });
+    lockBtn.addEventListener('click', ()=>{
+      localStorage.removeItem('trixieGiftUnlocked');
+      showLocked();
+    });
+
+    // initial state
+    if(localStorage.getItem('trixieGiftUnlocked') === '1'){
+      showUnlocked();
+    } else {
+      showLocked();
+    }
+
+    // Songs
+    const songs = [
+      { title: "Song 1", artist: "Your Artist", file: "public/song1.mp3" },
+      { title: "Song 2", artist: "Your Artist", file: "public/song2.mp3" },
+      { title: "Song 3", artist: "Your Artist", file: "public/song3.mp3" },
+      { title: "Song 4", artist: "Your Artist", file: "public/song4.mp3" }
+    ];
+
+    const songList = document.getElementById('songList');
+    const songSearch = document.getElementById('songSearch');
+    const resetSongs = document.getElementById('resetSongs');
+
+    function render(list){
+      songList.innerHTML = "";
+      if(list.length === 0){
+        songList.innerHTML = '<div class="song"><div class="meta"><div class="title">No results</div><div class="artist">Try a different search</div></div></div>';
+        return;
+      }
+
+      for(const s of list){
+        const el = document.createElement('div');
+        el.className = 'song';
+        el.innerHTML = `
+          <div class="meta">
+            <div class="title" title="${escapeHtml(s.title)}">${escapeHtml(s.title)}</div>
+            <div class="artist" title="${escapeHtml(s.artist)}">${escapeHtml(s.artist)}</div>
+          </div>
+          <div class="audio-wrap">
+            <audio controls preload="none">
+              <source src="${s.file}" type="audio/mpeg" />
+            </audio>
+          </div>
+        `;
+        songList.appendChild(el);
+      }
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#039;'}[m]));
+    }
+
+    function applyFilter(){
+      const q = (songSearch.value || '').trim().toLowerCase();
+      if(!q) return render(songs);
+      render(songs.filter(s => (s.title + ' ' + s.artist).toLowerCase().includes(q)));
+    }
+
+    songSearch.addEventListener('input', applyFilter);
+    resetSongs.addEventListener('click', ()=>{
+      songSearch.value = '';
+      render(songs);
+      songSearch.focus();
+    });
+
+    // render only if content is visible
+    if(!content.hidden){
+      render(songs);
+    }
+
+    const obs = new MutationObserver(()=>{
+      if(!content.hidden){
+        render(songs);
+      }
+    });
+    obs.observe(content, { attributes:true, attributeFilter:['hidden'] });
+  </script>
+</body>
+</html>
+
